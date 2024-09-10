@@ -35,7 +35,7 @@ axiosInstance.interceptors.response.use(
     error => {
         if(error.response && (error.response.status == HttpStatusCode.Unauthorized || error.response.status == HttpStatusCode.Forbidden)) {
             store.dispatch(removeUser());
-            window.location.href = process.env.APP_BASE_URL || "";
+            window.location.href = process.env.APP_BASE_URL ?? "";
         }
         return Promise.reject(error);
     }

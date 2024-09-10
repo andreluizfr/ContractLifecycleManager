@@ -6,6 +6,9 @@ import styles from '../styles/Home.module.css'
 import { useTest } from '@/hooks/useTest'
 import { useEffect } from 'react'
 import ChartExample from '@/components/BarChartExample'
+import Menu from '@/components/ui/custom/menu'
+import HeadInfoCard from '@/components/ui/custom/head-info-card'
+import { LoanDataTable } from '@/components/ui/custom/loan-data-table'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,29 +28,20 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
+      <main className='flex flex-col justify-between items-center p-24 pt-4 min-h-screen'>
+        <Menu />
+
+        <div className='w-full flex justify-between items-center my-4 gap-4'>
+          <HeadInfoCard />
+          <HeadInfoCard />
+          <HeadInfoCard />
+          <HeadInfoCard />
+          <HeadInfoCard />
+        </div>
+
+        <div className='w-full'>
+          <LoanDataTable />
+
         </div>
 
         <div className={styles.center}>
