@@ -1,0 +1,9 @@
+{
+    "server": {
+        "response": {
+            "error": {
+                "cant_response_a_request": "O servidor não pode responder a essa requisição."
+            }
+        }
+    }
+}
