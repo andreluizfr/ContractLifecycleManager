@@ -5,5 +5,29 @@
                 "cant_response_a_request": "O servidor não pode responder a essa requisição."
             }
         }
+    },
+    "webapp": {
+        "loanColumn": {
+            "clientName": "Nome Cliente",
+            "loanDate": "Data Emprést.",
+            "loanAmount": "Valor Emprést.",
+            "status": "<status>Status</status>",
+            "interestRate": "Juros (% a.m)",
+            "interestAmount": "Juros (R$)",
+            "totalDebtAmount": "Dívida Total (R$)",
+            "dailyFine": "Multa Diária (%)",
+            "installments": "Parcelas",
+            "installmentsPayed": "Parcelas Quitadas",
+            "toReceiveInterestAmount": "Rec. Juros",
+            "pastDueAmount": "Atrasado",
+            "currentDebtAmount": "Dívida Atual",
+            "actions": "Ações",
+            "loanStatus": {
+                "goodStanding": "<status>Em dia</status>",
+                "pastDue": "<status>Atrasado</status>",
+                "default": "<status>Inadimplente</status>",
+                "paidOff": "<status>Pago</status>"
+            }
+        }
     }
 }

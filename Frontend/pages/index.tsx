@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import styles from '../styles/Home.module.css'
 import { useTest } from '@/hooks/useTest'
 import { useEffect } from 'react'
-import ChartExample from '@/components/BarChartExample'
+import MoneyBarChart from '@/components/ui/custom/money-bar-chart'
 import Menu from '@/components/ui/custom/menu'
 import HeadInfoCard from '@/components/ui/custom/head-info-card'
 import { LoanDataTable } from '@/components/ui/custom/loan-data-table'
@@ -41,7 +41,6 @@ export default function Home() {
 
         <div className='w-full'>
           <LoanDataTable />
-
         </div>
 
         <div className={styles.center}>
@@ -63,66 +62,7 @@ export default function Home() {
             />
           </div>
         </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-        <ChartExample />
+        <MoneyBarChart />
       </main>
     </>
   )

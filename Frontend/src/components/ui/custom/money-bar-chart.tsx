@@ -25,7 +25,7 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export default function BarChartExample() {
+export default function MoneyBarChart() {
 
     return (
         <ChartContainer config={chartConfig} className="h-[500px] w-full">
