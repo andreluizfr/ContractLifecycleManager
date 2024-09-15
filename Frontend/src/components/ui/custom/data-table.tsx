@@ -5,11 +5,11 @@ import {
     flexRender,
     getCoreRowModel,
     useReactTable,
-    getPaginationRowModel,
     SortingState,
     ColumnFiltersState,
     getFilteredRowModel,
-    VisibilityState
+    VisibilityState,
+    PaginationState
 } from "@tanstack/react-table";
 
 import {
@@ -22,15 +22,17 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../button";
 import { Input } from "@/components/ui/input";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "../dropdown-menu";
 import { useTranslation } from "react-i18next";
 import { DataTablePagination } from "./data-table-pagination";
 
-
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[],
+    rowCount: number,
+    pagination: PaginationState,
+    setPagination: Dispatch<SetStateAction<PaginationState>>,
     sorting: SortingState,
     setSorting: Dispatch<SetStateAction<SortingState>>,
     columnFilters: ColumnFiltersState,
@@ -42,8 +44,11 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({
-    columns,
     data,
+    rowCount,
+    columns,
+    pagination,
+    setPagination,
     sorting,
     setSorting,
     columnFilters,
@@ -54,24 +59,34 @@ export function DataTable<TData, TValue>({
     setRowSelection
 }: Readonly<DataTableProps<TData, TValue>>) {
 
+    useEffect(()=>{
+        console.log(data);
+    }, [data]);
+
     const { t } = useTranslation();
 
     const table = useReactTable({
-        data,
+        data: data,
         columns,
+        rowCount: rowCount,
+        manualPagination: true,
         getCoreRowModel: getCoreRowModel(),
+        onPaginationChange: setPagination,
         onSortingChange: setSorting, //pode remover se não precisar de ordenação
-        getPaginationRowModel: getPaginationRowModel(), //pode remover se não precisar de paginação
         onColumnFiltersChange: setColumnFilters, //pode remover se não precisar de filtros
         getFilteredRowModel: getFilteredRowModel(), //pode remover se não precisar de filtros
         onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,  //adiciona um checkbox em cada pra cada linha e um no header para selecionar todos
         state: {
-          sorting,
-          columnFilters,
-          columnVisibility,
-          rowSelection
+            pagination,
+            sorting,
+            columnFilters,
+            columnVisibility,
+            rowSelection
         },
+        debugTable: true,
+        debugHeaders: true,
+        debugColumns: true,
     });
 
     return (

@@ -5,24 +5,32 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
-import { DollarSign } from 'lucide-react'
+import { LucideProps } from 'lucide-react';
+import { ForwardRefExoticComponent, RefAttributes } from "react";
 
-export default function HeadInfoCard() {
+interface IProps {
+	title: string,
+	value: string,
+	description: string,
+	Icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>
+}
+
+export default function HeadInfoCard({title, value, description, Icon}: Readonly<IProps>) {
     return (
 		<Card className="flex-grow">
 			<CardHeader className="p-3 flex-row justify-between items-center">
-				<CardDescription>Total Revenue</CardDescription>
-				<DollarSign className="w-4" style={{margin: 0}}/>
+				<CardDescription>{title}</CardDescription>
+				<Icon className="w-6" style={{margin: 0}}/>
 			</CardHeader>
 
 			<CardContent className="p-3 pt-0">
-				<CardTitle>$45,231.89</CardTitle>
+				<CardTitle>{value}</CardTitle>
 			</CardContent>
 
 			<CardFooter className="p-3">
-				<CardDescription className="text-xs text-muted-foreground">+20.1% from last month</CardDescription>
+				<CardDescription className="text-xs text-muted-foreground">{description}</CardDescription>
 			</CardFooter>
 		</Card>
     )

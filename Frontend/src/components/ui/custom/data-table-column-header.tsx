@@ -15,20 +15,25 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../dropdown-menu"
+import { Trans } from "react-i18next"
 
 interface DataTableColumnHeaderProps<TData, TValue>
 	extends React.HTMLAttributes<HTMLDivElement> {
 	column: Column<TData, TValue>
-	title: string
+	i18nKey: string
 }
 
 export default function DataTableColumnHeader<TData, TValue>({
 	column,
-	title,
+	i18nKey,
 	className,
 }: Readonly<DataTableColumnHeaderProps<TData, TValue>>) {
 	if (!column.getCanSort()) {
-		return <div className={cn(className)}>{title}</div>
+		return <div className={cn(className)}>
+					<Trans i18nKey={i18nKey}>
+						{i18nKey}
+					</Trans>
+				</div>
 	}
 
 	return (
@@ -40,7 +45,11 @@ export default function DataTableColumnHeader<TData, TValue>({
 						size="sm"
 						className="-ml-3 h-8 data-[state=open]:bg-accent"
 					>
-						<span>{title}</span>
+						<span>
+							<Trans i18nKey={i18nKey}>
+								{i18nKey}
+							</Trans>
+						</span>
 						{column.getIsSorted() === "desc" ? (
 							<ArrowDownIcon className="ml-2 h-4 w-4" />
 						) : <></>}

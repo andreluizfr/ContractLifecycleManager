@@ -10,6 +10,8 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
+import { Trans } from "react-i18next";
+import { ClipboardList, Inbox, ChartNoAxesCombined , SquarePen } from 'lucide-react';
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -57,7 +59,10 @@ export default function Menu() {
                 <NavigationMenuItem>
                     <Link href="/lancamentos" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Lançamentos
+                            <ClipboardList className='mr-2 w-6'/>
+                            <Trans i18nKey={'webapp.menu.releases'}>
+                              Lançamentos
+                            </Trans>
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
@@ -65,13 +70,21 @@ export default function Menu() {
                 <NavigationMenuItem>
                     <Link href="/entradasSaidas" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Entradas e Saídas
+                            <Inbox className='mr-2 w-6'/>
+                            <Trans i18nKey={'webapp.menu.entrancesAndExits'}>
+                              Entradas e Saídas
+                            </Trans>
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>Relatórios</NavigationMenuTrigger>
+                    <NavigationMenuTrigger>
+                      <ChartNoAxesCombined className='mr-2 w-6'/>
+                      <Trans i18nKey={'webapp.menu.reports'}>
+                        Relatórios
+                      </Trans>
+                    </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                         {components.map((component) => (
@@ -90,7 +103,10 @@ export default function Menu() {
                 <NavigationMenuItem>
                     <Link href="/cadastros" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Cadastros
+                            <SquarePen className='mr-2 w-6'/>
+                            <Trans i18nKey={'webapp.menu.registrations'}>
+                              Cadastros
+                            </Trans>
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>

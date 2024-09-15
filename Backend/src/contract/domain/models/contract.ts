@@ -1,0 +1,18 @@
+export class Contract {
+  public createdAt: Date;
+  public modifiedAt?: Date;
+  public loanDate: Date;
+  public clientName: string;
+  public loanAmount: number;
+  public interestRate: number;
+  public dailyFine: number;
+  public installments: number;
+  public installmentsPayed: number;
+  public pastDueAmount: number;
+  public status: number;
+
+  constructor(data: Partial<Contract>) {
+    Object.assign(this, data);
+    this.createdAt = new Date();
+  }
+}

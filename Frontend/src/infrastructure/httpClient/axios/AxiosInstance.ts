@@ -5,11 +5,11 @@ import { removeUser } from '@/infrastructure/store/redux/features/UserSlice'
 import { HttpStatusCode } from "../HttpStatusCode"
 
 const axiosInstance = axios.create({
-    baseURL: process.env.API_BASE_URL
+    baseURL: process.env.API_BASE_URL || 'http://localhost:5000'
 });
 
-axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = process.env.APP_BASE_URL;
-axiosInstance.defaults.headers.common['Access-Control-Allow-Methods'] = "POST, GET, PUT, DELETE, OPTIONS";
+axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = process.env.APP_BASE_URL || 'localhost:5000';
+axiosInstance.defaults.headers.common['Access-Control-Allow-Methods'] = "POST, GET, HEAD, PUT, PATCH, DELETE, OPTIONS";
 axiosInstance.defaults.headers.common['Access-Control-Allow-Headers'] = "*";
 axiosInstance.defaults.headers.common['Access-Control-Expose-Headers'] = "Set-Cookie";
 axiosInstance.defaults.withCredentials = true;

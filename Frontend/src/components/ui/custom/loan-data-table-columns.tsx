@@ -16,7 +16,7 @@ import DataTableColumnHeader from "./data-table-column-header";
 
 export type LoanDTO = {
     id: number
-    loanDate: string
+    loanDate: Date
     clientName: string
     loanAmount: number
     interestRate: number
@@ -52,7 +52,11 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
     },
     {
         accessorKey: "clientName",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Nome Cliente</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                        <Trans i18nKey={'webapp.loanStatus.loanColumn.clientName'}>
+                            Nome Cliente
+                        </Trans>
+                    </div>,
         cell: ({ row }) => <div className="text-center font-medium">{row.getValue("clientName")}</div>
     },
     {
@@ -63,16 +67,20 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    <div className="text-center font-medium whitespace-nowrap">Data Emprést.</div>
+                    <div className="text-center font-medium whitespace-nowrap">
+                        <Trans i18nKey={'webapp.loanStatus.loanColumn.loanDate'}>
+                            Data Emprést.
+                        </Trans>
+                    </div>
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
-        cell: ({ row }) => <div className="text-center font-medium">{row.getValue("loanDate")}</div>
+        cell: ({ row }) => <div className="text-center font-medium">{new Date(row.getValue("loanDate")).toISOString().split('T')[0]}</div>
     },
     {
         accessorKey: "loanAmount",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Valor Emprést." />,
+        header: ({ column }) => <DataTableColumnHeader column={column} i18nKey='webapp.loanColumn.loanAmount'/>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("loanAmount"))
             const formatted = new Intl.NumberFormat("pt-BR", {
@@ -84,26 +92,38 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
     },
     {
         accessorKey: "status",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Status</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.status'}>
+                                Status
+                            </Trans>
+                        </div>,
         cell: ({ row }) => {
             const status = recreateEnum(parseInt(row.getValue("status")));
             return (
-                <Trans i18nKey={'webapp.loanStatus.loanColumn.' + status?.id} components={{
-                    status: <div className="text-center font-medium"/>
-                }}>
-                    {status?.fallbackDescription}
-                </Trans>
+                <div className="text-center font-medium whitespace-nowrap">
+                    <Trans i18nKey={'webapp.loanStatus.loanColumn.' + status?.id}>
+                        {status?.fallbackDescription}
+                    </Trans>
+                </div>
             )
         }
     },
     {
         accessorKey: "interestRate",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Juros (% a.m)</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.interestRate'}>
+                                Juros (% a.m)
+                            </Trans>
+                        </div>,
         cell: ({ row }) => <div className="text-center font-medium">{(parseFloat(row.getValue("interestRate")) * 100) + "%"}</div>
     },
     {
         accessorKey: "interestAmount",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Juros (R$)</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.interestAmount'}>
+                                Juros (R$)
+                            </Trans>
+                        </div>,
         cell: ({row}) => {
             const loanAmount = parseFloat(row.getValue("loanAmount"));
             const interestRate = parseFloat(row.getValue("interestRate"));
@@ -119,7 +139,11 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
     },
     {
         accessorKey: "totalDebtAmount",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Dívida Total (R$)</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.totalDebtAmount'}>
+                                Dívida Total (R$)
+                            </Trans>
+                        </div>,
         cell: ({ row }) => {
             const loanAmount = parseFloat(row.getValue("loanAmount"));
             const interestRate = parseFloat(row.getValue("interestRate"));
@@ -135,22 +159,38 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
     },
     {
         accessorKey: "dailyFine",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Multa Diária (%)</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.dailyFine'}>
+                                Multa Diária (%)
+                            </Trans>
+                        </div>,
         cell: ({ row }) => <div className="text-center font-medium">{row.getValue("dailyFine")}</div>
     },
     {
         accessorKey: "installments",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Parcelas</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.installments'}>
+                                Parcelas
+                            </Trans>
+                        </div>,
         cell: ({ row }) => <div className="text-center font-medium">{row.getValue("installments")}</div>
     },
     {
         accessorKey: "installmentsPayed",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Parcelas Quitadas</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.installmentsPayed'}>
+                                Parcelas Quitadas
+                            </Trans>
+                        </div>,
         cell: ({ row }) => <div className="text-center font-medium">{row.getValue("installmentsPayed")}</div>
     },
     {
         accessorKey: "toReceiveInterestAmount",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Rec. Juros</div>,
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.toReceiveInterestAmount'}>
+                                Rec. Juros
+                            </Trans>
+                        </div>,
         cell: ({ row }) => {
             const loanAmount = parseFloat(row.getValue("loanAmount"));
             const interestRate = parseFloat(row.getValue("interestRate"));
@@ -168,12 +208,20 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
     },
     {
         accessorKey: "pastDueAmount",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Atrasado</div>, //mostrar tooltip, descrevendo que inclui parcelas atrasadas e multa diária
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.pastDueAmount'}>
+                                Atrasado
+                            </Trans>
+                        </div>, //mostrar tooltip, descrevendo que inclui parcelas atrasadas e multa diária
         cell: ({ row }) => <div className="text-center font-medium">{row.getValue("pastDueAmount")}</div>
     },
     {
         accessorKey: "currentDebtAmount",
-        header: () => <div className="text-center font-medium whitespace-nowrap">Dívida Atual</div>, //mostrar tooltip, descrevendo que inclui parcelas atrasadas com multa diária e parcelas restantes
+        header: () => <div className="text-center font-medium whitespace-nowrap">
+                            <Trans i18nKey={'webapp.loanStatus.loanColumn.currentDebtAmount'}>
+                                Dívida Atual
+                            </Trans>
+                        </div>, //mostrar tooltip, descrevendo que inclui parcelas atrasadas com multa diária e parcelas restantes
         cell: ({ row }) => {
             const loanAmount = parseFloat(row.getValue("loanAmount"));
             const interestRate = parseFloat(row.getValue("interestRate"));

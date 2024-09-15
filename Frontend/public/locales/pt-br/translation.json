@@ -7,6 +7,12 @@
         }
     },
     "webapp": {
+        "menu": {
+            "releases": "Lançamentos",
+            "entrancesAndExits": "Entradas e Saídas",
+            "reports": "Relatórios",
+            "registrations": "Cadastros"
+        },
         "loanColumn": {
             "clientName": "Nome Cliente",
             "loanDate": "Data Emprést.",
@@ -23,10 +29,10 @@
             "currentDebtAmount": "Dívida Atual",
             "actions": "Ações",
             "loanStatus": {
-                "goodStanding": "<status>Em dia</status>",
-                "pastDue": "<status>Atrasado</status>",
-                "default": "<status>Inadimplente</status>",
-                "paidOff": "<status>Pago</status>"
+                "1": "Em dia",
+                "2": "Atrasado",
+                "3": "Inadimplente",
+                "4": "Pago"
             }
         }
     }
