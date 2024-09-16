@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { SaveUserController } from 'src/user/adapter/in/saveUser.controller';
-import { SaveUserService } from 'src/user/application/services/saveUser.service';
+import { UserController } from 'src/user/adapter/in/user.controller';
+import { UserService } from 'src/user/application/services/user.service';
 
 @Module({
-  controllers: [SaveUserController],
-  providers: [SaveUserService],
+  controllers: [UserController],
+  providers: [UserService],
 })
 export class UserModule {}

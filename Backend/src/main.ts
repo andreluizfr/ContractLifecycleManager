@@ -1,19 +1,28 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
+
+  const configService = new ConfigService();
+
+  const serverUrl = configService.get<string>('SERVER_URL');
+  const serverPort = configService.get<string>('SERVER_PORT');
+
+  const webAppUrl = configService.get<string>('WEB_APP_URL');
+  const webAppPort = configService.get<string>('WEB_APP_PORT');
+
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: [
-      'http://localhost:3000',
-      'http://example.com',
+      `${webAppUrl}:${webAppPort}`
     ],
     methods: ['POST', 'GET', 'HEAD', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
 
-  await app.listen(5000, () => {
-    console.log(`server running on "${'localhost'}:${5000}"`);
+  await app.listen(serverPort, () => {
+    console.log(`Server running on ${serverUrl}:${serverPort}`);
   });
 }
 bootstrap();

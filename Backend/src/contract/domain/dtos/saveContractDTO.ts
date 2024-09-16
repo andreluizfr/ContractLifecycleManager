@@ -39,6 +39,6 @@ export class SaveContractDTO {
   readonly status: number;
 
   toContract(): Contract {
-    return new Contract(this);
+    return Contract.new(this);
   }
 }

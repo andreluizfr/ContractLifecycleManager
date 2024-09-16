@@ -1,16 +1,10 @@
 import { Provider } from "@nestjs/common"
-import { SaveContractUseCase } from "src/contract/application/ports/in/saveContract.useCase"
-import { SaveContractService } from "src/contract/application/services/saveContract.service"
-import { LoadPaginatedContractsUseCase } from "./in/loadPaginatedContracts.useCase"
-import { LoadPaginatedContractsService } from "../services/loadPaginatedContracts.service"
+import { ContractUseCase } from "src/contract/application/ports/in/contract.useCase"
+import { ContractService } from "src/contract/application/services/contract.service"
 
 export const Services: Provider[] = [
   {
-    provide: SaveContractUseCase,
-    useClass: SaveContractService
-  },
-  {
-    provide: LoadPaginatedContractsUseCase,
-    useClass: LoadPaginatedContractsService
+    provide: ContractUseCase,
+    useClass: ContractService
   }
 ]

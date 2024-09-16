@@ -2,7 +2,6 @@ import { Provider } from "@nestjs/common"
 import { UserPersistensePort } from "src/user/application/ports/out/userPersistense.port"
 import { UserPersistenseAdapter } from "src/user/adapter/out/user-persistence.adapter";
 import { UserMapper } from "src/user/adapter/out/user-mapper";
-//import { MongoDatabaseService } from "src/persistence/mongo-database-service";
 
 export const ServicesOut: Provider[] = [
   {
@@ -10,5 +9,4 @@ export const ServicesOut: Provider[] = [
     useClass: UserPersistenseAdapter
   },
   UserMapper,
-  //MongoDatabaseService
 ]

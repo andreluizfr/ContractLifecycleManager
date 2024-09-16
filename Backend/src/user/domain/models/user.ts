@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import { hash } from 'bcrypt';
 
 export class User {
   public createdAt?: Date;
@@ -8,15 +8,17 @@ export class User {
   public email: string;
   public password: string;
 
-  static async new(data: User) {
+  static async new(data: Partial<User>) {
     const user = new User(data);
-    const hash = await bcrypt.hash(data.password, 10);
-    user.password = hash;
+    console.log(user);
+
+    const hashedPassword = await hash(user.password, 10);
+    user.password = hashedPassword;
+    user.createdAt = new Date();
     return user;
   }
 
-  constructor(data: User) {
+  constructor(data: Partial<User>) {
     Object.assign(this, data);
-    this.createdAt = new Date();
   }
 }

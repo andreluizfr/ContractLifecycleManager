@@ -11,8 +11,15 @@ export class Contract {
   public pastDueAmount: number;
   public status: number;
 
+  static new(data: Partial<Contract>) {
+    const contract = new Contract(data);
+    console.log(contract);
+
+    contract.createdAt = new Date();
+    return contract;
+  }
+
   constructor(data: Partial<Contract>) {
     Object.assign(this, data);
-    this.createdAt = new Date();
   }
 }

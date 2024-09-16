@@ -1,6 +1,6 @@
 import { forwardRef, Module } from "@nestjs/common";
 import { AppModule } from "src/app.module";
-import { SaveUserController } from "src/user/adapter/in/saveUser.controller";
+import { UserController } from "src/user/adapter/in/user.controller";
 import { ServicesOut } from "src/user/adapter/adapter.provider";
 
 @Module({
@@ -9,7 +9,7 @@ import { ServicesOut } from "src/user/adapter/adapter.provider";
   ],
   providers: [...ServicesOut],
   exports: [...ServicesOut],
-  controllers: [SaveUserController],
+  controllers: [UserController],
 })
 
 export class AdapterModule {}

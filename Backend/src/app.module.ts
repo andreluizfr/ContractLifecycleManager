@@ -1,6 +1,7 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { forwardRef, Module, OnModuleInit } from '@nestjs/common';
 
-import { PersistenceModule } from './persistence/persistence.module';
+import { PersistenceModule } from 'src/persistence/persistence.module';
+import { SeedService } from 'src/persistence/seed.service';
 
 import { Services as UserServices } from 'src/user/application/ports/ports.provider';
 import { AdapterModule as UserAdapterModule } from 'src/user/adapter/adapter.module';
@@ -22,4 +23,11 @@ import { ConfigModule } from '@nestjs/config';
   providers: [...UserServices, ...ContractServices],
   exports: [...UserServices, ...ContractServices]
 })
-export class AppModule {}
+
+export class AppModule implements OnModuleInit {
+  constructor(private readonly seedService: SeedService) {}
+
+  async onModuleInit() {
+    await this.seedService.populateDatabase();
+  }
+}

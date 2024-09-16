@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
-import { SaveContractController } from 'src/contract/adapter/in/saveContract.controller';
-import { SaveContractService } from 'src/contract/application/services/saveContract.service';
-import { LoadPaginatedContractsController } from 'src/contract/adapter/in/loadPaginatedContracts.controller';
-import { LoadPaginatedContractsService } from 'src/contract/application/services/loadPaginatedContracts.service';
+import { ContractController } from 'src/contract/adapter/in/contract.controller';
+import { ContractService } from 'src/contract/application/services/contract.service';
 
 @Module({
-  controllers: [SaveContractController, LoadPaginatedContractsController],
-  providers: [SaveContractService, LoadPaginatedContractsService],
+  controllers: [ContractController],
+  providers: [ContractService],
 })
-export class UserModule {}
+export class PortModule {}
