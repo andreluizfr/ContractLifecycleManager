@@ -11,7 +11,7 @@
             "releases": "Lançamentos",
             "entrancesAndExits": "Entradas e Saídas",
             "reports": "Relatórios",
-            "registrations": "Cadastros"
+            "clients": "Clientes"
         },
         "loanColumn": {
             "clientName": "Nome Cliente",
@@ -34,6 +34,33 @@
                 "3": "Inadimplente",
                 "4": "Pago"
             }
+        },
+        "clientColumn": {
+            "_id": "Id",
+            "name": "Nome",
+            "phoneNumber": "Whatsapp",
+            "cpf": "CPF",
+            "rg": "RG",
+            "address": "Endereço",
+            "pixKey": "Chave Pix",
+            "bankName": "Banco",
+            "bankAgence": "Agência",
+            "bankAccount": "Conta",
+            "observations": "Observações",
+            "actions": "Ações"
+        },
+        "financialTransactionColumn": {
+            "client": "Id do Cliente",
+            "clientName": "Nome do Cliente",
+            "transactionMethod": "Método de Transferência",
+            "amount": "Valor",
+            "observations": "Observações",
+            "actions": "Ações"
+        },
+        "transactionMethod": {
+            "1": "Pix",
+            "2": "TED",
+            "3": "Boleto"
         }
     }
 }

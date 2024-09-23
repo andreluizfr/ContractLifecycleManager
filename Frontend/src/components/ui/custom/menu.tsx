@@ -15,10 +15,10 @@ import { ClipboardList, Inbox, ChartNoAxesCombined , SquarePen } from 'lucide-re
 
 const components: { title: string; href: string; description: string }[] = [
     {
-      title: "Alert Dialog",
-      href: "/docs/primitives/alert-dialog",
+      title: "Entradas e Saídas",
+      href: "/relatorios/transacoes",
       description:
-        "A modal dialog that interrupts the user with important content and expects a response.",
+        "Tire insights a partir de gráficos sobre as transações financeiras dos últimos meses.",
     },
     {
       title: "Hover Card",
@@ -57,9 +57,9 @@ export default function Menu() {
             <NavigationMenuList>
 
                 <NavigationMenuItem>
-                    <Link href="/lancamentos" legacyBehavior passHref>
+                    <Link href="/" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <ClipboardList className='mr-2 w-6'/>
+                            <ClipboardList className='mr-2 w-6' strokeWidth={1.4}/>
                             <Trans i18nKey={'webapp.menu.releases'}>
                               Lançamentos
                             </Trans>
@@ -70,7 +70,7 @@ export default function Menu() {
                 <NavigationMenuItem>
                     <Link href="/entradasSaidas" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <Inbox className='mr-2 w-6'/>
+                            <Inbox className='mr-2 w-6' strokeWidth={1.4}/>
                             <Trans i18nKey={'webapp.menu.entrancesAndExits'}>
                               Entradas e Saídas
                             </Trans>
@@ -80,13 +80,13 @@ export default function Menu() {
 
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>
-                      <ChartNoAxesCombined className='mr-2 w-6'/>
+                      <ChartNoAxesCombined className='mr-2 w-6' strokeWidth={1.4}/>
                       <Trans i18nKey={'webapp.menu.reports'}>
                         Relatórios
                       </Trans>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                        <ul className="grid gap-3 p-4 w-full md:w-[450px] md:grid-cols-2 lg:w-[600px]">
                         {components.map((component) => (
                             <ListItem
                                 key={component.title}
@@ -101,11 +101,11 @@ export default function Menu() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                    <Link href="/cadastros" legacyBehavior passHref>
+                    <Link href="/clientes" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <SquarePen className='mr-2 w-6'/>
-                            <Trans i18nKey={'webapp.menu.registrations'}>
-                              Cadastros
+                            <SquarePen className='mr-2 w-6' strokeWidth={1.4}/>
+                            <Trans i18nKey={'webapp.menu.clients'}>
+                              Clientes
                             </Trans>
                         </NavigationMenuLink>
                     </Link>

@@ -6,13 +6,13 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger
-} from "../dropdown-menu";
-import { Button } from "../button";
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { MoreHorizontal, ArrowUpDown } from "lucide-react";
 import { recreateEnum } from "@/domain/enums/loanStatus";
 import { Trans } from "react-i18next";
-import { Checkbox } from "../checkbox";
-import DataTableColumnHeader from "./data-table-column-header";
+import { Checkbox } from "@/components/ui/checkbox";
+import DataTableColumnHeader from "@/components/ui/custom/data-table-column-header";
 
 export type LoanDTO = {
     id: number
@@ -53,11 +53,11 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
     {
         accessorKey: "clientName",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                        <Trans i18nKey={'webapp.loanStatus.loanColumn.clientName'}>
+                        <Trans i18nKey={'webapp.loanColumn.clientName'}>
                             Nome Cliente
                         </Trans>
                     </div>,
-        cell: ({ row }) => <div className="text-center font-medium">{row.getValue("clientName")}</div>
+        cell: ({ row }) => <div className="text-center text-muted-foreground">{row.getValue("clientName")}</div>
     },
     {
         accessorKey: "loanDate",
@@ -68,7 +68,7 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     <div className="text-center font-medium whitespace-nowrap">
-                        <Trans i18nKey={'webapp.loanStatus.loanColumn.loanDate'}>
+                        <Trans i18nKey={'webapp.loanColumn.loanDate'}>
                             Data Emprést.
                         </Trans>
                     </div>
@@ -76,7 +76,7 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
                 </Button>
             )
         },
-        cell: ({ row }) => <div className="text-center font-medium">{new Date(row.getValue("loanDate")).toISOString().split('T')[0]}</div>
+        cell: ({ row }) => <div className="text-center text-muted-foreground">{new Date(row.getValue("loanDate")).toISOString().split('T')[0]}</div>
     },
     {
         accessorKey: "loanAmount",
@@ -87,13 +87,13 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
                 style: "currency",
                 currency: "BRL"
             }).format(amount)
-            return <div className="text-center font-medium">{formatted}</div>
+            return <div className="text-center text-muted-foreground">{formatted}</div>
         }
     },
     {
         accessorKey: "status",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.status'}>
+                            <Trans i18nKey={'webapp.loanColumn.status'}>
                                 Status
                             </Trans>
                         </div>,
@@ -101,7 +101,7 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
             const status = recreateEnum(parseInt(row.getValue("status")));
             return (
                 <div className="text-center font-medium whitespace-nowrap">
-                    <Trans i18nKey={'webapp.loanStatus.loanColumn.' + status?.id}>
+                    <Trans i18nKey={'webapp.loanColumn.' + status?.id}>
                         {status?.fallbackDescription}
                     </Trans>
                 </div>
@@ -111,16 +111,16 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
     {
         accessorKey: "interestRate",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.interestRate'}>
+                            <Trans i18nKey={'webapp.loanColumn.interestRate'}>
                                 Juros (% a.m)
                             </Trans>
                         </div>,
-        cell: ({ row }) => <div className="text-center font-medium">{(parseFloat(row.getValue("interestRate")) * 100) + "%"}</div>
+        cell: ({ row }) => <div className="text-center text-muted-foreground">{(parseFloat(row.getValue("interestRate")) * 100) + "%"}</div>
     },
     {
         accessorKey: "interestAmount",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.interestAmount'}>
+                            <Trans i18nKey={'webapp.loanColumn.interestAmount'}>
                                 Juros (R$)
                             </Trans>
                         </div>,
@@ -134,13 +134,13 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
                 currency: "BRL"
             }).format(interestAmount);
             //Levar em consideração mais na frente se está pendente de dívida
-            return <div className="text-center font-medium">{formatted}</div>
+            return <div className="text-center text-muted-foreground">{formatted}</div>
         }
     },
     {
         accessorKey: "totalDebtAmount",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.totalDebtAmount'}>
+                            <Trans i18nKey={'webapp.loanColumn.totalDebtAmount'}>
                                 Dívida Total (R$)
                             </Trans>
                         </div>,
@@ -154,40 +154,40 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
                 currency: "BRL"
             }).format(totalDebtAmount);
             //Levar em consideração mais na frente se está pendente de dívida
-            return <div className="text-center font-medium">{formatted}</div>
+            return <div className="text-center text-muted-foreground">{formatted}</div>
         }
     },
     {
         accessorKey: "dailyFine",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.dailyFine'}>
+                            <Trans i18nKey={'webapp.loanColumn.dailyFine'}>
                                 Multa Diária (%)
                             </Trans>
                         </div>,
-        cell: ({ row }) => <div className="text-center font-medium">{row.getValue("dailyFine")}</div>
+        cell: ({ row }) => <div className="text-center text-muted-foreground">{row.getValue("dailyFine")}</div>
     },
     {
         accessorKey: "installments",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.installments'}>
+                            <Trans i18nKey={'webapp.loanColumn.installments'}>
                                 Parcelas
                             </Trans>
                         </div>,
-        cell: ({ row }) => <div className="text-center font-medium">{row.getValue("installments")}</div>
+        cell: ({ row }) => <div className="text-center text-muted-foreground">{row.getValue("installments")}</div>
     },
     {
         accessorKey: "installmentsPayed",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.installmentsPayed'}>
+                            <Trans i18nKey={'webapp.loanColumn.installmentsPayed'}>
                                 Parcelas Quitadas
                             </Trans>
                         </div>,
-        cell: ({ row }) => <div className="text-center font-medium">{row.getValue("installmentsPayed")}</div>
+        cell: ({ row }) => <div className="text-center text-muted-foreground">{row.getValue("installmentsPayed")}</div>
     },
     {
         accessorKey: "toReceiveInterestAmount",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.toReceiveInterestAmount'}>
+                            <Trans i18nKey={'webapp.loanColumn.toReceiveInterestAmount'}>
                                 Rec. Juros
                             </Trans>
                         </div>,
@@ -203,22 +203,22 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
                 currency: "BRL"
             }).format(toReceiveInterestAmount);
             //Levar em consideração mais na frente se está pendente de dívida
-            return <div className="text-center font-medium">{formatted}</div>
+            return <div className="text-center text-muted-foreground">{formatted}</div>
         }
     },
     {
         accessorKey: "pastDueAmount",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.pastDueAmount'}>
+                            <Trans i18nKey={'webapp.loanColumn.pastDueAmount'}>
                                 Atrasado
                             </Trans>
                         </div>, //mostrar tooltip, descrevendo que inclui parcelas atrasadas e multa diária
-        cell: ({ row }) => <div className="text-center font-medium">{row.getValue("pastDueAmount")}</div>
+        cell: ({ row }) => <div className="text-center text-muted-foreground">{row.getValue("pastDueAmount")}</div>
     },
     {
         accessorKey: "currentDebtAmount",
         header: () => <div className="text-center font-medium whitespace-nowrap">
-                            <Trans i18nKey={'webapp.loanStatus.loanColumn.currentDebtAmount'}>
+                            <Trans i18nKey={'webapp.loanColumn.currentDebtAmount'}>
                                 Dívida Atual
                             </Trans>
                         </div>, //mostrar tooltip, descrevendo que inclui parcelas atrasadas com multa diária e parcelas restantes
@@ -234,7 +234,7 @@ export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
                 currency: "BRL"
             }).format(currentDebtAmount);
             //Levar em consideração mais na frente se está pendente de dívida
-            return <div className="text-center font-medium">{formatted}</div>
+            return <div className="text-center text-muted-foreground">{formatted}</div>
         }
     },
     {

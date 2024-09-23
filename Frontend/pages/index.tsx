@@ -3,23 +3,15 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '../styles/Home.module.css'
-import { useTest } from '@/hooks/useTest'
-import { useEffect } from 'react'
-import MoneyBarChart from '@/components/ui/custom/money-bar-chart'
 import Menu from '@/components/ui/custom/menu'
-import HeadInfoCard from '@/components/ui/custom/head-info-card'
-import { LoanDataTable } from '@/components/ui/custom/loan-data-table'
+import HeadInfoCard from './contracts/components/head-info-card'
+import { LoanDataTable } from './contracts/components/loan-data-table'
 import { DollarSign, Handshake, HandCoins, PiggyBank, Landmark, Banknote, Gem, Wallet, CreditCard, Percent } from 'lucide-react';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-
-  // const mutation = useTest();
-
-  // useEffect(()=>{
-  //   mutation.mutate({});
-  // }, []);
 
   return (
     <>
@@ -94,7 +86,6 @@ export default function Home() {
             />
           </div>
         </div>
-        <MoneyBarChart />
       </main>
     </>
   )

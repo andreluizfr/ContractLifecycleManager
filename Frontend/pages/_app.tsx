@@ -5,6 +5,7 @@ import { ReactQueryProvider } from '@/providers/ReactQueryProvider'
 import { ReduxProvider } from '@/providers/ReduxProvider'
 import ThemeProvider from '@/providers/ThemeProvider'
 import { ToastContainer } from 'react-toastify'
+import { Toaster } from '@/components/ui/toaster'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
           hideProgressBar={false}
           theme="dark"
         />
+        <Toaster />
       </ReactQueryProvider>
     </ReduxProvider>
   )

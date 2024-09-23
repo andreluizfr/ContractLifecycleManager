@@ -20,12 +20,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Button } from "../button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "../dropdown-menu";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useTranslation } from "react-i18next";
-import { DataTablePagination } from "./data-table-pagination";
+import { DataTablePagination } from "@/components/ui/custom/data-table-pagination";
+import { SlidersHorizontal } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -93,17 +94,18 @@ export function DataTable<TData, TValue>({
         <div>
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filtre clientes..."
-                    value={(table.getColumn("clientName")?.getFilterValue() as string) ?? ""}
+                    placeholder="Filtre nomes..."
+                    value={(table.getColumn("client")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("clientName")?.setFilterValue(event.target.value)
+                        table.getColumn("client")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
-                 <DropdownMenu>
+                <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
-                            Colunas
+                        <Button variant="outline" className="ml-auto font-normal">
+                            Colunas&nbsp;
+                            <SlidersHorizontal className="w-4" strokeWidth={1.4}/>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -122,7 +124,7 @@ export function DataTable<TData, TValue>({
                                             column.toggleVisibility(!!value)
                                         }
                                     >
-                                        {t('webapp.loanColumn.' + column.id)}
+                                        {t('webapp.financialTransactionColumn.' + column.id)}
                                     </DropdownMenuCheckboxItem>
                                 )
                             })
@@ -134,20 +136,20 @@ export function DataTable<TData, TValue>({
                 <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
-                    <TableRow key={headerGroup.id}>
-                        {headerGroup.headers.map((header) => {
-                        return (
-                            <TableHead key={header.id}>
-                            {header.isPlaceholder
-                                ? null
-                                : flexRender(
-                                    header.column.columnDef.header,
-                                    header.getContext()
-                                )}
-                            </TableHead>
-                        )
-                        })}
-                    </TableRow>
+                        <TableRow key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => {
+                            return (
+                                <TableHead key={header.id} className="px-2 [&:has([role=checkbox])]:pr-2 text-primary">
+                                {header.isPlaceholder
+                                    ? null
+                                    : flexRender(
+                                        header.column.columnDef.header,
+                                        header.getContext()
+                                    )}
+                                </TableHead>
+                            )
+                            })}
+                        </TableRow>
                     ))}
                 </TableHeader>
                 <TableBody>
@@ -158,7 +160,7 @@ export function DataTable<TData, TValue>({
                             data-state={row.getIsSelected() && "selected"}
                         >
                         {row.getVisibleCells().map((cell) => (
-                            <TableCell key={cell.id} onClick={() => console.info(cell.column.id)}>
+                            <TableCell key={cell.id} onClick={() => console.info(cell.column.id)} className="p-2">
                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
                             </TableCell>
                         ))}
@@ -175,12 +177,6 @@ export function DataTable<TData, TValue>({
                 </Table>
             </div>
             <div className="flex flex-1 text-sm text-muted-foreground justify-between">
-
-                <div className="flex items-center justify-start py-4">
-                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
-                </div>
-
                 <DataTablePagination table={table}/>
 
                 <div className="flex items-center justify-end space-x-2 py-4">
