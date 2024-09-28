@@ -32,7 +32,7 @@ export class MongoDatabaseService {
                         pass: password,
                     });
                 } else {
-                    this.conn = await mongoose.connect(`mongodb+srv://${username}:${password}@${cluster}.mongodb.net/?retryWrites=true&w=majority&appName${databaseName}`, {
+                    this.conn = await mongoose.connect(`mongodb+srv://${username}:${password}@${cluster}.mongodb.net/?retryWrites=true&w=majority&appName=${databaseName}`, {
                             serverApi: {
                                 version: '1',
                                 strict: true,
