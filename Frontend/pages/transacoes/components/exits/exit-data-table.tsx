@@ -33,7 +33,12 @@ const exits: FinancialTransaction[] = [
     transactionMethod: TransactionMethod.PIX,
     amount: 100,
     pixKey: "string",
-    observations: "string"
+    observations: "string",
+    user: {
+      _id: "string",
+      email: "string",
+      password: "string"
+    }
   },
   {
     _id: "1",
@@ -70,7 +75,12 @@ const exits: FinancialTransaction[] = [
       agence: "string",
       account: "string"
     },
-    observations: "string"
+    observations: "string",
+    user: {
+      _id: "string",
+      email: "string",
+      password: "string"
+    }
   }
 ];
 

@@ -11,8 +11,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Client } from "@/domain/models/Client"
 import { UserRoundPlus } from "lucide-react";
-import { Client } from "./client-data-table-columns"
 //import { ElementType } from "react"
 
 interface Props {
@@ -100,7 +100,7 @@ export function SaveClient({client}: Readonly<Props>) {
             <Input
               id="pixKey"
               className="col-span-3"
-              defaultValue={client?.pixKey}
+              defaultValue={client?.pixKey ?? ''}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -110,7 +110,7 @@ export function SaveClient({client}: Readonly<Props>) {
             <Input
               id="bankName"
               className="col-span-3"
-              defaultValue={client?.bankName}
+              defaultValue={client?.bankAccount?.financialInstitution.description}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -120,7 +120,7 @@ export function SaveClient({client}: Readonly<Props>) {
             <Input
               id="bankAgence"
               className="col-span-3"
-              defaultValue={client?.bankAgence}
+              defaultValue={client?.bankAccount?.agence}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -130,7 +130,7 @@ export function SaveClient({client}: Readonly<Props>) {
             <Input
               id="bankAccount"
               className="col-span-3"
-              defaultValue={client?.bankAccount}
+              defaultValue={client?.bankAccount?.account}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">

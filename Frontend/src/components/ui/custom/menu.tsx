@@ -53,66 +53,66 @@ const components: { title: string; href: string; description: string }[] = [
 
 export default function Menu() {
     return (
-        <NavigationMenu>
-            <NavigationMenuList>
+      <NavigationMenu>
+        <NavigationMenuList>
 
-                <NavigationMenuItem>
-                    <Link href="/" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <ClipboardList className='mr-2 w-6' strokeWidth={1.4}/>
-                            <Trans i18nKey={'webapp.menu.releases'}>
-                              Lançamentos
-                            </Trans>
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                    <Link href="/entradasSaidas" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <Inbox className='mr-2 w-6' strokeWidth={1.4}/>
-                            <Trans i18nKey={'webapp.menu.entrancesAndExits'}>
-                              Entradas e Saídas
-                            </Trans>
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                    <NavigationMenuTrigger>
-                      <ChartNoAxesCombined className='mr-2 w-6' strokeWidth={1.4}/>
-                      <Trans i18nKey={'webapp.menu.reports'}>
-                        Relatórios
+          <NavigationMenuItem>
+              <Link href="/contratos" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                      <ClipboardList className='mr-2 w-6' strokeWidth={1.4}/>
+                      <Trans i18nKey={'webapp.menu.contracts'}>
+                        Contratos
                       </Trans>
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        <ul className="grid gap-3 p-4 w-full md:w-[450px] md:grid-cols-2 lg:w-[600px]">
-                        {components.map((component) => (
-                            <ListItem
-                                key={component.title}
-                                title={component.title}
-                                href={component.href}
-                            >
-                                {component.description}
-                            </ListItem>
-                        ))}
-                        </ul>
-                    </NavigationMenuContent>
-                </NavigationMenuItem>
+                  </NavigationMenuLink>
+              </Link>
+          </NavigationMenuItem>
 
-                <NavigationMenuItem>
-                    <Link href="/clientes" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <SquarePen className='mr-2 w-6' strokeWidth={1.4}/>
-                            <Trans i18nKey={'webapp.menu.clients'}>
-                              Clientes
-                            </Trans>
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
+          <NavigationMenuItem>
+              <Link href="/transacoes" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                      <Inbox className='mr-2 w-6' strokeWidth={1.4}/>
+                      <Trans i18nKey={'webapp.menu.financialTransactions'}>
+                        Transações
+                      </Trans>
+                  </NavigationMenuLink>
+              </Link>
+          </NavigationMenuItem>
 
-            </NavigationMenuList>
-        </NavigationMenu>
+          <NavigationMenuItem>
+              <NavigationMenuTrigger>
+                <ChartNoAxesCombined className='mr-2 w-6' strokeWidth={1.4}/>
+                <Trans i18nKey={'webapp.menu.reports'}>
+                  Relatórios
+                </Trans>
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                  <ul className="grid gap-3 p-4 w-full md:w-[450px] md:grid-cols-2 lg:w-[600px]">
+                  {components.map((component) => (
+                      <ListItem
+                          key={component.title}
+                          title={component.title}
+                          href={component.href}
+                      >
+                          {component.description}
+                      </ListItem>
+                  ))}
+                  </ul>
+              </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+              <Link href="/clientes" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                      <SquarePen className='mr-2 w-6' strokeWidth={1.4}/>
+                      <Trans i18nKey={'webapp.menu.clients'}>
+                        Clientes
+                      </Trans>
+                  </NavigationMenuLink>
+              </Link>
+          </NavigationMenuItem>
+
+        </NavigationMenuList>
+      </NavigationMenu>
     )
 }
 

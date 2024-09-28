@@ -6,12 +6,14 @@ import { ReduxProvider } from '@/providers/ReduxProvider'
 import ThemeProvider from '@/providers/ThemeProvider'
 import { ToastContainer } from 'react-toastify'
 import { Toaster } from '@/components/ui/toaster'
+import Header from '@/components/ui/custom/header'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ReduxProvider>
       <ReactQueryProvider>
         <ThemeProvider>
+          <Header />
           <Component {...pageProps} />
         </ThemeProvider>
         <ToastContainer

@@ -6,6 +6,7 @@ const nextConfig = {
     APP_BASE_URL: process.env.APP_BASE_URL
   },
   useFileSystemPublicRoutes: false,
+  swcMinify: false
 }
 
 module.exports = nextConfig

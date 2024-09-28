@@ -1,4 +1,4 @@
-import { LoanDTO } from "../../pages/contracts/loan-data-table-columns";
+import { LoanDTO } from "../../pages/contratos/components/loan-data-table-columns";
 import { makeHttpClient } from "@/factories/makeHttpClient";
 import { useQuery } from "@tanstack/react-query";
 import { ColumnFiltersState, PaginationState, SortingState } from "@tanstack/react-table";

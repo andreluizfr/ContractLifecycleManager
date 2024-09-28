@@ -32,7 +32,12 @@ const entrances: FinancialTransaction[] = [
     transactionMethod: TransactionMethod.PIX,
     amount: 100,
     pixKey: "string",
-    observations: "string"
+    observations: "string",
+    user: {
+      _id: "string",
+      email: "string",
+      password: "string"
+    }
   },
   {
     _id: "1",
@@ -49,7 +54,7 @@ const entrances: FinancialTransaction[] = [
         financialInstitution: {
           _id: "string",
           cod: "string",
-          description: "string"
+          description: "string",
         },
         agence: "string",
         account: "string"
@@ -69,7 +74,12 @@ const entrances: FinancialTransaction[] = [
       agence: "string",
       account: "string"
     },
-    observations: "string"
+    observations: "string",
+    user: {
+      _id: "string",
+      email: "string",
+      password: "string"
+    }
   }
 ];
 

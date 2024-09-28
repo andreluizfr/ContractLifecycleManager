@@ -15,7 +15,6 @@ export default function Cadastros() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='flex flex-col justify-start items-center p-6 md:p-12 lg:p-24 pt-2 md:pt-4 lg:pt-8 min-h-screen'>
-        <Menu />
         <div className="w-full mt-2">
           <SaveClient/>
           <ClientDataTable />

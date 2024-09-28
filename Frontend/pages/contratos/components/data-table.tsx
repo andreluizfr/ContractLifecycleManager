@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
     });
 
     return (
-        <div>
+        <div className="flex flex-col w-full overflow-hidden rounded-[0.5rem] border bg-background shadow p-4">
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filtre clientes..."
@@ -98,11 +98,11 @@ export function DataTable<TData, TValue>({
                     onChange={(event) =>
                         table.getColumn("clientName")?.setFilterValue(event.target.value)
                     }
-                    className="max-w-sm"
+                    className="max-w-sm shadow-sm"
                 />
                  <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
+                        <Button variant="outline" className="ml-auto shadow-sm">
                             Colunas
                         </Button>
                     </DropdownMenuTrigger>
@@ -174,12 +174,7 @@ export function DataTable<TData, TValue>({
                 </TableBody>
                 </Table>
             </div>
-            <div className="flex flex-1 text-sm text-muted-foreground justify-between">
-
-                <div className="flex items-center justify-start py-4">
-                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
-                </div>
+            <div className="flex text-sm justify-between">
 
                 <DataTablePagination table={table}/>
 
@@ -202,7 +197,6 @@ export function DataTable<TData, TValue>({
                     </Button>
                 </div>
             </div>
-
         </div>
     )
 }

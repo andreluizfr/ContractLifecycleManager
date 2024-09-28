@@ -1,11 +1,10 @@
 'use client'
 import Head from 'next/head'
-import Menu from '../../src/components/ui/custom/menu'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import EntranceDataTable from './components/entrances/entrance-data-table'
 import ExitDataTable from './components/exits/exit-data-table'
 
-export default function EntrancesAndExits() {
+export default function FinancialTransactions() {
 
   return (
     <>
@@ -16,7 +15,6 @@ export default function EntrancesAndExits() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='flex flex-col justify-start items-center p-6 md:p-12 lg:p-24 pt-2 md:pt-4 lg:pt-8 min-h-screen'>
-        <Menu />
         <Tabs defaultValue="entrances" className="w-full mt-2">
           <TabsList>
             <TabsTrigger value="entrances">Entradas</TabsTrigger>

@@ -2,12 +2,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '../styles/Home.module.css'
-import Menu from '@/components/ui/custom/menu'
-import HeadInfoCard from './contracts/components/head-info-card'
-import { LoanDataTable } from './contracts/components/loan-data-table'
-import { DollarSign, Handshake, HandCoins, PiggyBank, Landmark, Banknote, Gem, Wallet, CreditCard, Percent } from 'lucide-react';
-
+import { DollarSign, HandCoins, Landmark, Wallet } from 'lucide-react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,62 +16,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='flex flex-col justify-between items-center p-6 md:p-12 lg:p-24 pt-2 md:pt-4 lg:pt-8 min-h-screen'>
-        <Menu />
-
-        <div className='w-full flex justify-between items-center my-4 gap-4 md:gap-2 flex-wrap'>
-          <HeadInfoCard
-            title='Total Investido'
-            value='10'
-            description='+20.1% from last month'
-            Icon={Banknote}
-          />
-          <HeadInfoCard
-            title='Rec. Principal'
-            value='10000.00'
-            description='+20.1% from last month'
-            Icon={Handshake}
-          />
-          <HeadInfoCard
-            title='Rec. Juros'
-            value='10000.00'
-            description='+20.1% from last month'
-            Icon={Percent}
-          />
-          <HeadInfoCard
-            title='Prov. Juros'
-            value='10000.00'
-            description='+20.1% from last month'
-            Icon={Gem}
-          />
-          <HeadInfoCard
-            title='Atrasado'
-            value='10000.00'
-            description='+20.1% from last month'
-            Icon={CreditCard}
-          />
-          <HeadInfoCard
-            title='Total a Receber'
-            value='10000.00'
-            description='+20.1% from last month'
-            Icon={PiggyBank}
-          />
-        </div>
-
-        <div className='w-full'>
-          <LoanDataTable />
-        </div>
-
-        <div className={styles.center}>
+      <main className='flex flex-col justify-start items-center p-6 md:p-12 lg:p-24 pt-2 md:pt-4 lg:pt-8 min-h-screen'>
+        <div className=''>
           <Image
-            className={styles.logo}
+            className=''
             src="/next.svg"
             alt="Next.js Logo"
             width={180}
             height={37}
             priority
           />
-          <div className={styles.thirteen}>
+          <div className=''>
             <Image
               src="/thirteen.svg"
               alt="13"

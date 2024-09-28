@@ -8,8 +8,8 @@
     },
     "webapp": {
         "menu": {
-            "releases": "Lançamentos",
-            "entrancesAndExits": "Entradas e Saídas",
+            "contracts": "Contratos",
+            "financialTransactions": "Transações",
             "reports": "Relatórios",
             "clients": "Clientes"
         },

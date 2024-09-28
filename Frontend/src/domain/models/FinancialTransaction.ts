@@ -1,8 +1,10 @@
 import { BankAccount } from "./BankAccount";
 import { Client } from "./Client";
+import User from "./User";
 
 export type FinancialTransaction = {
   _id: string
+  user: User
   client: Client
   transactionType: TransactionType
   transactionMethod: TransactionMethod
