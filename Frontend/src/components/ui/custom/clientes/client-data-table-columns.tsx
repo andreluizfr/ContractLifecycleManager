@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import DataTableColumnHeader from "../../../src/components/ui/custom/data-table-column-header";
+import DataTableColumnHeader from "../data-table-column-header";
 import { SaveClient } from './save-client'
 import { EditMessage } from "./edit-message";
 import { Client } from "@/domain/models/Client";

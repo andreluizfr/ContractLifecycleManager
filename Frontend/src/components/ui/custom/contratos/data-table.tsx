@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useTranslation } from "react-i18next";
-import { DataTablePagination } from "../../../src/components/ui/custom/data-table-pagination";
+import { DataTablePagination } from "../data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]

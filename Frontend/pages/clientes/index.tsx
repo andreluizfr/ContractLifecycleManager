@@ -1,8 +1,7 @@
 'use client'
 import Head from 'next/head'
-import Menu from '../../src/components/ui/custom/menu'
-import { ClientDataTable } from './components/client-data-table'
-import { SaveClient } from './components/save-client'
+import { SaveClient } from '@/components/ui/custom/clientes/save-client'
+import { ClientDataTable } from '@/components/ui/custom/clientes/client-data-table'
 
 export default function Cadastros() {
 

@@ -1,8 +1,8 @@
 'use client'
 import Head from 'next/head'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import EntranceDataTable from './components/entrances/entrance-data-table'
-import ExitDataTable from './components/exits/exit-data-table'
+import EntranceDataTable from '@/components/ui/custom/transacoes/entrances/entrance-data-table'
+import ExitDataTable from '@/components/ui/custom/transacoes/exits/exit-data-table'
 
 export default function FinancialTransactions() {
 

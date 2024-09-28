@@ -1,9 +1,9 @@
 'use client'
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import HeadInfoCard from './components/head-info-card'
-import { LoanDataTable } from './components/loan-data-table'
 import { Handshake, PiggyBank, Banknote, Gem, CreditCard, Percent } from 'lucide-react';
+import HeadInfoCard from '@/components/ui/custom/contratos/head-info-card';
+import { LoanDataTable } from '@/components/ui/custom/contratos/loan-data-table';
 
 const inter = Inter({ subsets: ['latin'] });
 

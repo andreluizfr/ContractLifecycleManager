@@ -1,7 +1,7 @@
 import Head from "next/head";
-import MoneyBarChart from "./components/money-bar-chart";
 import Menu from "@/components/ui/custom/menu";
-import { DailyTransactionsBarChart } from "./components/daily-transactions-bar-chart";
+import { DailyTransactionsBarChart } from "@/components/ui/custom/relatorios/transacoes/daily-transactions-bar-chart";
+import MoneyBarChart from "@/components/ui/custom/relatorios/transacoes/money-bar-chart";
 
 export default function transactionsReports () {
   return(
