@@ -65,8 +65,9 @@
   },
   "overrides": {
     "eslint": {
-      "@humanwhocodes/config-array": "npm:@eslint/config-array",
-      "file-entry-cache": "8.0.0"
+      "file-entry-cache": "8.0.0",
+      "@humanwhocodes/object-schema": "@eslint/object-schema",
+      "@humanwhocodes/config-array": "@eslint/config-array"
     }
   }
 }
