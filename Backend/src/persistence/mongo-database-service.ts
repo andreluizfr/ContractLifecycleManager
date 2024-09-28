@@ -32,14 +32,16 @@ export class MongoDatabaseService {
                         user: username,
                         pass: password,
                     });
+                } else {
+                    this.conn = await mongoose.connect(`mongodb+srv://${username}:${password}@${cluster}.mongodb.net/?retryWrites=true&w=majority&appName${databaseName}`, {
+                            serverApi: {
+                                version: '1',
+                                strict: true,
+                                deprecationErrors: true
+                            }
+                        }
+                    );
                 }
-                /*
-                this.conn = await mongoose.createConnection(`mongodb+srv://${this.username}:${this.password}@${this.cluster}.mongodb.net/${this.dbName}?retryWrites=true&w=majority`, {
-                    authSource: "admin",
-                    useNewUrlParser : true,
-                    useUnifiedTopology: true }
-                ).asPromise();
-                */
                 response.message = "Connected to the database."
             }
 

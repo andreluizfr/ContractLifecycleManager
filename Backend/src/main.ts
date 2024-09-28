@@ -7,7 +7,7 @@ async function bootstrap() {
   const configService = new ConfigService();
 
   const serverUrl = configService.get<string>('SERVER_URL');
-  const serverPort = configService.get<string>('SERVER_PORT');
+  const serverPort = configService.get<string>('PORT_CONTRATUAL_BACKEND_SERVER') ?? configService.get<string>('SERVER_PORT') ?? '5000';
 
   const webAppUrl = configService.get<string>('WEB_APP_URL');
   const webAppPort = configService.get<string>('WEB_APP_PORT');

@@ -13,7 +13,7 @@ export class SeedService {
       await this.populateUsers();
       await this.populateContracts();
     } else {
-      console.error("Mongo não conectado!");
+      console.error("MongoDb not connected!");
     }
   }
 
