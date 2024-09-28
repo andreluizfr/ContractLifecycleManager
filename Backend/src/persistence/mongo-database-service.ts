@@ -22,12 +22,11 @@ export class MongoDatabaseService {
                 const username = this.configService.get<string>('MONGO_USERNAME');
                 const password = this.configService.get<string>('MONGO_PASSWORD');
                 const databaseName = this.configService.get<string>('MONGO_DB_NAME');
-                const url = this.configService.get<string>('MONGO_DB_URL');
                 const port = this.configService.get<string>('MONGO_DB_PORT');
                 const cluster = this.configService.get<string>('MONGO_CLUSTER');
 
                 if(nodeEnvironment === 'development') {
-                    this.conn = await mongoose.connect(`mongodb://${url}:${port}/${databaseName}?retryWrites=true&w=majority`, {
+                    this.conn = await mongoose.connect(`mongodb://${cluster}:${port}/${databaseName}?retryWrites=true&w=majority`, {
                         authSource: "admin",
                         user: username,
                         pass: password,
