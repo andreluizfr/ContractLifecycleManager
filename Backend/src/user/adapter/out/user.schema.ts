@@ -4,7 +4,7 @@ import { User } from 'src/user/domain/models/user';
 export const UserSchema = new Schema<User>({
   createdAt: {
     type: Date,
-    required: false
+    required: true
   },
   modifiedAt: {
     type: Date,

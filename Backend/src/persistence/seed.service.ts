@@ -24,8 +24,8 @@ export class SeedService {
 
     if(usersCount === 0) {
       const initialUsers = [
-        await User.new({ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', password: 'password1' }),
-        await User.new({ firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', password: 'password2' }),
+        await User.new({ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', password: 'password1', createdAt: new Date }),
+        await User.new({ firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', password: 'password2', createdAt: new Date }),
       ];
 
       await userModel.insertMany(initialUsers);
@@ -48,7 +48,8 @@ export class SeedService {
           installments: 4,
           installmentsPayed: 1,
           pastDueAmount: 0,
-          status: 1
+          status: 1,
+          createdAt: new Date
         }
         const option2 = {
           loanDate: new Date(),
@@ -59,7 +60,8 @@ export class SeedService {
           installments: 5,
           installmentsPayed: 2,
           pastDueAmount: 0,
-          status: 1
+          status: 1,
+          createdAt: new Date
         }
         return (Math.random()*10 < 5) ? option1 : option2;
       });
