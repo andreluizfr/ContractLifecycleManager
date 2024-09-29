@@ -11,7 +11,9 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true //needed for using output: 'export'
-  }
+  },
+  //trailingSlash: true,
+  //useFileSystemPublicRoutes: true,
 }
 
 module.exports = nextConfig
