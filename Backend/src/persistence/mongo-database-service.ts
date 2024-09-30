@@ -33,7 +33,8 @@ export class MongoDatabaseService {
                     });
                 } else {
                     this.conn = await mongoose.connect(`mongodb+srv://${username}:${password}@${cluster}.mongodb.net/?retryWrites=true&w=majority&appName=${databaseName}`, {
-                            serverApi: {
+                        dbName: databaseName,
+                        serverApi: {
                                 version: '1',
                                 strict: true,
                                 deprecationErrors: true

@@ -17,7 +17,7 @@ export default function Contracts() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='flex flex-col justify-start items-center p-6 md:p-12 lg:p-24 pt-2 md:pt-4 lg:pt-8 min-h-screen'>
+      <main className='flex flex-col justify-start items-center p-6 md:p-12 lg:p-24 py-2 md:py-4 lg:py-8 min-h-screen gap-2'>
         <div className='w-full flex justify-between items-center my-4 gap-4 md:gap-2 flex-wrap'>
           <HeadInfoCard
             title='Total Investido'

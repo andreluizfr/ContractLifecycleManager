@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Menu from "@/components/ui/custom/menu";
 import { DailyTransactionsBarChart } from "@/components/ui/custom/relatorios/transacoes/daily-transactions-bar-chart";
 import MoneyBarChart from "@/components/ui/custom/relatorios/transacoes/money-bar-chart";
 
@@ -12,8 +11,7 @@ export default function transactionsReports () {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='flex flex-col justify-start items-center p-6 md:p-12 lg:p-24 pt-2 md:pt-4 lg:pt-8 min-h-screen gap-2'>
-        <Menu />
+      <main className='flex flex-col justify-start items-center p-6 md:p-12 lg:p-24 py-2 md:py-4 lg:py-8 min-h-screen gap-2'>
         <div className='w-full flex justify-around items-end my-4 gap-4 md:gap-2 flex-wrap lg:flex-nowrap'>
           <MoneyBarChart />
           <DailyTransactionsBarChart />

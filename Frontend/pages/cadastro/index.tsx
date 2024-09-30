@@ -15,17 +15,18 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 const formSchema = z.object({
-  email: z.string({
-    required_error: "Campo obrigatório",
+  email: z.string().email({
+    message: "Formato de e-mail inválido.",
   }),
-  password: z.string({
-    required_error: "Campo obrigatório",
+  password: z.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,{
+    message: "A senha deve possuir pelo menos 1 letra minúscula, 1 letra maiúscula, 1 caractere especial ($*&@#) e 8 caracteres totais.",
   }),
 });
 
-export default function Login() {
+export default function Signup() {
 
   const [loading, setLoading] = useState(false);
+  const [passwordFieldVisible, setPasswordFieldVisible] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,9 +56,9 @@ export default function Login() {
 
         <div className='flex-1 flex flex-col justify-start items-center p-4 md-p6 lg:p-12'>
           <nav className='self-end'>
-            <Link href='/cadastro' className='font-medium'>
+            <Link href='/login' className='font-medium'>
               <Button variant="ghost">
-                Cadastrar-se
+              Login
               </Button>
             </Link>
           </nav>
@@ -65,10 +66,10 @@ export default function Login() {
             <article className='absolute m-auto inset-0 h-fit flex flex-col justify-center items-center gap-2'>
               <CardHeader className='w-full'>
                 <CardTitle className='text-center'>
-                  Entrar
+                  Crie uma conta
                 </CardTitle>
                 <CardDescription className='text-center'>
-                  Insira seu e-mail abaixo para entrar na sua conta
+                  Insira seu e-mail abaixo para criar sua conta
                 </CardDescription>
               </CardHeader>
 
@@ -81,27 +82,29 @@ export default function Login() {
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <Input type='email' placeholder='E-mail' className='w-full mb-2 shadow-sm' {...field}/>
+                            <Input type='email' placeholder='E-mail' className='w-full mb-2 shadow-sm' {...field} onFocus={()=>setPasswordFieldVisible(true)}/>
                           </FormControl>
                           <FormMessage className='font-normal !mb-2'/>
                         </FormItem>
                       )}
                     />
-                    <FormField
-                      control={form.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Input type='password' placeholder='Senha' className='w-full mb-2 shadow-sm' {...field}/>
-                          </FormControl>
-                          <FormMessage className='font-normal !mb-2'/>
-                        </FormItem>
-                      )}
-                    />
+                    {passwordFieldVisible &&
+                      <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input type='password' placeholder='Senha' className='w-full mb-2 shadow-sm' {...field}/>
+                            </FormControl>
+                            <FormMessage className='font-normal !mb-2'/>
+                          </FormItem>
+                        )}
+                      />
+                    }
                     <Button className='w-full shadow' disabled={loading}>
                       {loading? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : <Mail className='mr-2 h-4 w-4' />}
-                      {loading ? "Por favor, aguarde" : "Entrar com e-mail"}
+                      {loading ? "Por favor, aguarde" : "Cadastre-se com e-mail"}
                     </Button>
                   </form>
                 </Form>
@@ -127,6 +130,15 @@ export default function Login() {
                 />
                 Google
               </Button>
+
+              <CardFooter>
+                <p className='text-base text-muted-foreground text-center'>
+                  Clicando para continuar, você concorda com nossos
+                  {" "}<Link href='/termos' className="underline underline-offset-4 hover:text-primary">Termos de Serviço</Link>
+                  {" "}e
+                  {" "}<Link href='/privacidade' className="underline underline-offset-4 hover:text-primary">Política de Privacidade</Link>.
+                </p>
+              </CardFooter>
             </article>
           </section>
         </div>

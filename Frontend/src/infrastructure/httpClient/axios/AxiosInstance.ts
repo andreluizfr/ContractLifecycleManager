@@ -9,8 +9,6 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = process.env.APP_BASE_URL;
-axiosInstance.defaults.headers.common['Access-Control-Allow-Methods'] = "*";
-axiosInstance.defaults.headers.common['Access-Control-Allow-Headers'] = "*";
 axiosInstance.defaults.headers.common['Access-Control-Expose-Headers'] = "Set-Cookie";
 axiosInstance.defaults.withCredentials = true;
 

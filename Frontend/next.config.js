@@ -8,12 +8,10 @@ const nextConfig = {
     API_BASE_URL: process.env.API_BASE_URL,
     APP_BASE_URL: process.env.APP_BASE_URL
   },
-  output: 'export',
-  images: {
-    unoptimized: true //needed for using output: 'export'
-  },
-  //trailingSlash: true,
-  //useFileSystemPublicRoutes: true,
+  //output: 'export',
+  // images: {
+  //   unoptimized: true //needed for using output: 'export'
+  // },
 }
 
 module.exports = nextConfig

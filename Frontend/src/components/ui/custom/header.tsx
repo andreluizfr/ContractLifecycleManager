@@ -40,14 +40,20 @@ import {
   Users,
 } from "lucide-react"
 import Menu from "./menu";
+import { useSelector } from "react-redux";
+import { StoreState } from "@/infrastructure/store/redux/config";
 
 
 export default function Header() {
 
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state: StoreState) => state.user.data);
+
+  if(!user) return <></>
 
   return (
-    <div className="w-full flex justify-center items-center gap-6 p-4 md:p-8 lg:p-16 pt-1 md:pt-2 lg:pt-4">
+    <div className="w-full flex justify-center items-center gap-6 p-4 md:p-8 lg:p-16 py-1 md:py-2 lg:py-4">
+
       <div className="flex-1">
         <Menu/>
       </div>

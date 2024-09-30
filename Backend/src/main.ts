@@ -16,10 +16,26 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      `${webAppUrl}:${webAppPort}`
+      `${webAppUrl}:${webAppPort}`,
+      `localhost:${webAppPort}`,
+      `127.0.0.1:${webAppPort}`,
+      `http://contratual.com:${webAppPort}`,
+      `http://contratual.com`
     ],
-    methods: '*',
-    allowedHeaders: '*',
+    methods: ['POST', 'GET', 'HEAD', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: [
+      'Access-Control-Allow-Origin',
+      'Access-Control-Allow-Methods',
+      'Access-Control-Allow-Headers',
+      'Access-Control-Expose-Headers',
+      'Authorization',
+      'Accept',
+      'Content-Type',
+      'Referer',
+      'User-Agent',
+      'Content-Length',
+      'Content-Encoding'
+    ],
     credentials: true,
   });
 
