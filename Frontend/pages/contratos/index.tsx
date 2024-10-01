@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { Handshake, PiggyBank, Banknote, Gem, CreditCard, Percent } from 'lucide-react';
 import HeadInfoCard from '@/components/ui/custom/contratos/head-info-card';
-import { LoanDataTable } from '@/components/ui/custom/contratos/loan-data-table';
+import { ContractDataTable } from '@/components/ui/custom/contratos/contract-data-table';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -57,7 +57,7 @@ export default function Contracts() {
           />
         </div>
 
-        <LoanDataTable />
+        <ContractDataTable />
       </main>
     </>
   )

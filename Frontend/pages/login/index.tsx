@@ -1,42 +1,32 @@
-import React, { useState } from "react";
-import { Trans } from "react-i18next";
-
+import React from "react";
 import { Mail, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Head from "next/head";
 import Link from "next/link";
-import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Google from '../../public/icons/google.svg';
 import Image from "next/image";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-
-const formSchema = z.object({
-  email: z.string({
-    required_error: "Campo obrigatório",
-  }),
-  password: z.string({
-    required_error: "Campo obrigatório",
-  }),
-});
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useLogin } from "@/hooks/use-login";
+import { LoginForm, loginFormSchema } from "@/domain/dto/LoginForm";
 
 export default function Login() {
 
-  const [loading, setLoading] = useState(false);
+  const { mutate, error, isError, isPending, isSuccess } = useLogin();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<LoginForm>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: "",
       password: ""
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function onSubmit(values: LoginForm) {
+    mutate(values);
   }
 
   return (
@@ -99,9 +89,9 @@ export default function Login() {
                         </FormItem>
                       )}
                     />
-                    <Button className='w-full shadow' disabled={loading}>
-                      {loading? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : <Mail className='mr-2 h-4 w-4' />}
-                      {loading ? "Por favor, aguarde" : "Entrar com e-mail"}
+                    <Button className='w-full shadow' disabled={isPending}>
+                      {isPending ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : <Mail className='mr-2 h-4 w-4' />}
+                      {isPending ? "Por favor, aguarde" : "Entrar com e-mail"}
                     </Button>
                   </form>
                 </Form>

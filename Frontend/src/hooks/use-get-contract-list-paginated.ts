@@ -1,11 +1,11 @@
 
-import { LoanDTO } from "@/components/ui/custom/contratos/loan-data-table-columns";
+import { Contract } from "@/domain/models/Contract";
 import { makeHttpClient } from "@/factories/makeHttpClient";
 import { useQuery } from "@tanstack/react-query";
 import { ColumnFiltersState, PaginationState, SortingState } from "@tanstack/react-table";
 
 interface IPaginatedContractsResult {
-    results: LoanDTO[];
+    results: Contract[];
     totalCount: number;
     totalPages: number;
     currentPage: number;
@@ -16,7 +16,7 @@ interface IPaginatedRequestBody extends PaginationState {
     columnFilters: ColumnFiltersState
 }
 
-export const useGetLoanListPaginated = (pagination: PaginationState, sorting: SortingState, columnFilters: ColumnFiltersState) => {
+export const useGetContractListPaginated = (pagination: PaginationState, sorting: SortingState, columnFilters: ColumnFiltersState) => {
 
     const paginatedRequestBody: IPaginatedRequestBody = {
         ...pagination,
@@ -25,8 +25,8 @@ export const useGetLoanListPaginated = (pagination: PaginationState, sorting: So
     }
 
     const queryResult = useQuery({
-        queryKey: ['loanListPaginated', JSON.stringify(pagination)],
-        queryFn: async () => getLoanListPaginated(paginatedRequestBody),
+        queryKey: ['contractListPaginated', JSON.stringify(pagination)],
+        queryFn: async () => getContractListPaginated(paginatedRequestBody),
         staleTime: 3 * 60 * 60 * 1000, //colocar o tempo que dura o signed cookie
         gcTime: 24 * 60 * 60 * 1000,
     });
@@ -34,7 +34,7 @@ export const useGetLoanListPaginated = (pagination: PaginationState, sorting: So
     return queryResult; //para fazer o devido uso com relação a camada de view do react
 }
 
-export async function getLoanListPaginated (paginatedRequestBody: IPaginatedRequestBody) {
+export async function getContractListPaginated (paginatedRequestBody: IPaginatedRequestBody) {
 
     const httpClient = makeHttpClient<IPaginatedContractsResult>();
 

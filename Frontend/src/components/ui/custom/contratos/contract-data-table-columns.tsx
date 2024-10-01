@@ -13,21 +13,9 @@ import { recreateEnum } from "@/domain/enums/loanStatus";
 import { Trans } from "react-i18next";
 import { Checkbox } from "@/components/ui/checkbox";
 import DataTableColumnHeader from "@/components/ui/custom/data-table-column-header";
+import { Contract } from "@/domain/models/Contract";
 
-export type LoanDTO = {
-    id: number
-    loanDate: Date
-    clientName: string
-    loanAmount: number
-    interestRate: number
-    dailyFine: number
-    installments: number
-    installmentsPayed: number
-    pastDueAmount: number
-    status: number
-}
-
-export const loanDataTableColumns: ColumnDef<LoanDTO>[] = [
+export const contractDataTableColumns: ColumnDef<Contract>[] = [
     {
         id: "select",
         header: ({ table }) => (
