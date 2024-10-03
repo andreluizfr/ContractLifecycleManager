@@ -1,25 +1,41 @@
-import { userStore } from '@/infrastructure/store/zustand/userStore';
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+//import { cookies } from 'next/headers';
 
 export function middleware(request: NextRequest) {
 
-  const currentUser = userStore((state) => state.user);
+  // cookies().set({
+  //   name: 'name',
+  //   value: 'lee',
+  //   secure: true,
+  //   httpOnly: true,
+  //   path: '/',
+  //   maxAge: 0
+  // });
 
-  // Se o usuário estiver autenticado e tentar acessar a página de login, redirecioná-lo para o dashboard
+  // const hasCookie = cookieStore.has('theme')
+  // cookies().delete('name')
+
+  const currentUser = request.cookies.get('X-Refresh-Token')?.value;
+
   if (currentUser && request.nextUrl.pathname === '/login') {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // Se o usuário não estiver autenticado e tentar acessar qualquer página protegida, redirecioná-lo para a página de login
-  if (!currentUser && request.nextUrl.pathname.startsWith('/dashboard')) {
+  if (!currentUser && !isPublicRoute(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  // Permitir que a requisição continue para outras rotas não protegidas
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 }
+
+const publicRoutes = [
+  '/login',
+  '/cadastro'
+];
+
+const isPublicRoute = (pathname: string) => publicRoutes.some(r => pathname.startsWith(r));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Mail, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,10 +12,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useLogin } from "@/hooks/use-login";
 import { LoginForm, loginFormSchema } from "@/domain/dto/LoginForm";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 export default function Login() {
 
   const { mutate, error, isError, isPending, isSuccess } = useLogin();
+
+  const { toast } = useToast();
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginFormSchema),
@@ -28,6 +32,22 @@ export default function Login() {
   function onSubmit(values: LoginForm) {
     mutate(values);
   }
+
+  useEffect(()=>{
+    if(isError && error) {
+      toast({
+        variant: "destructive",
+        title: "Erro!",
+        description: error.message,
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    } else if(isSuccess) {
+      toast({
+        title: "Login feito com Sucesso!",
+        description: "Você vai ser redirecionado em breve.",
+      });
+    }
+  }, [error, isError, isSuccess]);
 
   return (
     <>
