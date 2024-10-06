@@ -14,10 +14,17 @@ import { useLogin } from "@/hooks/use-login";
 import { LoginForm, loginFormSchema } from "@/domain/dto/LoginForm";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import { useOnlyUnloggedRoute } from "@/hooks/use-unlogged-route";
+import { useGoogleLogin } from "@/hooks/use-google-login";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
 
+  useOnlyUnloggedRoute();
+
   const { mutate, error, isError, isPending, isSuccess } = useLogin();
+
+  const router = useRouter();
 
   const { toast } = useToast();
 
@@ -48,6 +55,10 @@ export default function Login() {
       });
     }
   }, [error, isError, isSuccess]);
+
+  const goToGoogleAuthPage = () => {
+    window.location.href = `${process.env.API_BASE_URL}/api/auth/google/login`
+  }
 
   return (
     <>
@@ -128,7 +139,7 @@ export default function Login() {
                 </div>
               </div>
 
-              <Button variant="outline" className='w-full gap-2 shadow-sm'>
+              <Button variant="outline" className='w-full gap-2 shadow-sm' onClick={goToGoogleAuthPage}>
                 <Image
                   width={16}
                   height={16}

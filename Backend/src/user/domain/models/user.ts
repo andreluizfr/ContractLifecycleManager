@@ -6,15 +6,18 @@ export class User {
   public firstName: string;
   public lastName: string;
   public email: string;
-  public password: string;
+  public password?: string;
+  public googleOAuthFlag: boolean;
 
   static async new(data: Partial<User>) {
     const user = new User(data);
-    console.log(user);
 
-    const hashedPassword = await hash(user.password, 10);
-    user.password = hashedPassword;
+    if(user.password?.length > 0) {
+      const hashedPassword = await hash(user.password, 10);
+      user.password = hashedPassword;
+    }
     user.createdAt = new Date();
+
     return user;
   }
 

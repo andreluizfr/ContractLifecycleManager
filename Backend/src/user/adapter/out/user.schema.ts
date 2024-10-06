@@ -25,7 +25,12 @@ export const UserSchema = new Schema<User>({
   },
   password: {
     type: String,
+    required: false,
+  },
+  googleOAuthFlag: {
+    type: Boolean,
     required: true,
+    default: false
   }
 });
 

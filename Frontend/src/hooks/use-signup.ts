@@ -1,12 +1,15 @@
 import { SignupForm } from "@/domain/dto/SignupForm";
-import { makeHttpClient } from "@/factories/makeHttpClient";
 import { useMutation } from "@tanstack/react-query";
+import { useHttpClient } from "./useHttpClient";
+import { IHttpClient } from "@/infrastructure/httpClient/IHttpClient";
 
 export const useSignup = () => {
 
+  const httpClient = useHttpClient<void>();
+
   const mutation = useMutation({
     mutationKey: ['signup'],
-    mutationFn: (signupProps: SignupForm) => signup(signupProps),
+    mutationFn: (signupProps: SignupForm) => signup(httpClient, signupProps),
     gcTime: 0,
     onMutate: (variables: SignupForm) => {},
     onSettled: (data: void | undefined, error: Error | null, variables: SignupForm, context: void | undefined) => {},
@@ -17,9 +20,6 @@ export const useSignup = () => {
   return mutation;
 }
 
-export async function signup (requestBody: SignupForm) {
-
-  const httpClient = makeHttpClient<void>();
-
+export async function signup (httpClient: IHttpClient<void>, requestBody: SignupForm) {
   await httpClient.post("/user/create", requestBody);
 }

@@ -1,5 +1,4 @@
 export interface IHttpResponse<T>{
-    data: T
-    message: string,
-    accessToken?: string
+  data: T
+  message: string,
 }

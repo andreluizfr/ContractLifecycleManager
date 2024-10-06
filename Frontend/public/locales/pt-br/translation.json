@@ -17,7 +17,7 @@
             "clientName": "Nome Cliente",
             "loanDate": "Data Emprést.",
             "loanAmount": "Valor Emprést.",
-            "status": "<status>Status</status>",
+            "status": "Status",
             "interestRate": "Juros (% a.m)",
             "interestAmount": "Juros (R$)",
             "totalDebtAmount": "Dívida Total (R$)",

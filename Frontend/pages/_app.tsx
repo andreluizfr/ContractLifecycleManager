@@ -9,7 +9,16 @@ import { Toaster } from '@/components/ui/toaster'
 import Header from '@/components/ui/custom/header'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import Loading from './loading'
+import Loading from '../src/components/ui/custom/loading'
+import dynamic from 'next/dynamic'
+
+const delaySomeTime = () => {
+  return new Promise<string>(resolve => {
+    setTimeout(() => {
+      resolve('');
+    }, 1000);
+  });
+};
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -32,16 +41,23 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, [router]);
 
+  const DelayedComponent = dynamic(() =>
+    delaySomeTime().then(() => Component),
+    {
+      loading: () => <Loading/>,
+    }
+  );
+
   return (
     <ReduxProvider>
       <ReactQueryProvider>
         <ThemeProvider>
           {loading ?
-            <Loading />
+            <Loading/>
             :
             <>
               <Header />
-              <Component {...pageProps} />
+              <DelayedComponent {...pageProps}/>
             </>
           }
         </ThemeProvider>

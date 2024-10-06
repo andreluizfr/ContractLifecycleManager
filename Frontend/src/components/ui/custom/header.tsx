@@ -40,14 +40,20 @@ import {
   Users,
 } from "lucide-react"
 import Menu from "./menu";
-import { useSelector } from "react-redux";
-import { StoreState } from "@/infrastructure/store/redux/config";
+import { useUserStore } from "@/infrastructure/store/zustand/use-user-store";
+import { useRouter } from "next/navigation";
 
 
 export default function Header() {
 
-  const [loading, setLoading] = useState(false);
-  const user = useSelector((state: StoreState) => state.user.data);
+  const router = useRouter();
+  const { user, removeAccessToken, removeUser } = useUserStore();
+
+  const logout = () => {
+    removeAccessToken();
+    removeUser();
+    router.push('/');
+  }
 
   if(!user) return <></>
 
@@ -140,7 +146,7 @@ export default function Header() {
             <span>API</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={logout} className='cursor-pointer'>
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

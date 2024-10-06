@@ -1,42 +1,35 @@
-
-import { Contract } from "@/domain/models/Contract";
-import { makeHttpClient } from "@/factories/makeHttpClient";
 import { useQuery } from "@tanstack/react-query";
 import { ColumnFiltersState, PaginationState, SortingState } from "@tanstack/react-table";
-
-interface IPaginatedContractsResult {
-    results: Contract[];
-    totalCount: number;
-    totalPages: number;
-    currentPage: number;
-}
+import { useHttpClient } from "./useHttpClient";
+import { IPaginatedResult } from "@/domain/dto/IPaginatedResult";
+import { Client } from "@/domain/models/Client";
+import { IHttpClient } from "@/infrastructure/httpClient/IHttpClient";
 
 interface IPaginatedRequestBody extends PaginationState {
-    sorting: SortingState,
-    columnFilters: ColumnFiltersState
+  sorting: SortingState,
+  columnFilters: ColumnFiltersState
 }
 
 export const useGetContractListPaginated = (pagination: PaginationState, sorting: SortingState, columnFilters: ColumnFiltersState) => {
 
-    const paginatedRequestBody: IPaginatedRequestBody = {
-        ...pagination,
-        sorting,
-        columnFilters
-    }
+  const httpClient = useHttpClient<IPaginatedResult<Client>>();
 
-    const queryResult = useQuery({
-        queryKey: ['contractListPaginated', JSON.stringify(pagination)],
-        queryFn: async () => getContractListPaginated(paginatedRequestBody),
-        staleTime: 3 * 60 * 60 * 1000, //colocar o tempo que dura o signed cookie
-        gcTime: 24 * 60 * 60 * 1000,
-    });
+  const paginatedRequestBody: IPaginatedRequestBody = {
+    ...pagination,
+    sorting,
+    columnFilters
+  }
 
-    return queryResult; //para fazer o devido uso com relação a camada de view do react
+  const queryResult = useQuery({
+    queryKey: ['contractListPaginated', JSON.stringify(pagination)],
+    queryFn: async () => getContractListPaginated(httpClient, paginatedRequestBody),
+    staleTime: 3 * 60 * 60 * 1000, //colocar o tempo que dura o signed cookie
+    gcTime: 24 * 60 * 60 * 1000,
+  });
+
+  return queryResult; //para fazer o devido uso com relação a camada de view do react
 }
 
-export async function getContractListPaginated (paginatedRequestBody: IPaginatedRequestBody) {
-
-    const httpClient = makeHttpClient<IPaginatedContractsResult>();
-
-    return (await httpClient.post("/contract/paginatedContracts", paginatedRequestBody)).data;
+export async function getContractListPaginated (httpClient: IHttpClient<IPaginatedResult<Client>>, paginatedRequestBody: IPaginatedRequestBody) {
+  return (await httpClient.post("/contract/paginatedContracts", paginatedRequestBody)).data;
 }

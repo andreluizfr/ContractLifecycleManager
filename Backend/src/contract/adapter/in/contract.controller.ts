@@ -3,11 +3,11 @@ import { ContractUseCase } from 'src/contract/application/ports/in/contract.useC
 import { LoadPaginatedContractsDTO } from 'src/contract/domain/dtos/loadPaginatedContractsDTO';
 import { SaveContractDTO } from 'src/contract/domain/dtos/saveContractDTO';
 
-@Controller()
+@Controller('contract')
 export class ContractController {
   constructor(private readonly contractUseCase: ContractUseCase) {}
 
-  @Post('/contract/save')
+  @Post('save')
   @UsePipes(new ValidationPipe({ transform: true }))
   async save(@Body() request: SaveContractDTO) {
     const data = await this.contractUseCase.saveContract(request.toContract());
@@ -17,7 +17,7 @@ export class ContractController {
     };
   }
 
-  @Post('/contract/paginatedContracts')
+  @Post('paginatedContracts')
   @UsePipes(new ValidationPipe({ transform: true }))
   async load(@Body() request: LoadPaginatedContractsDTO) {
     const data = await this.contractUseCase.loadPaginatedContracts(request);

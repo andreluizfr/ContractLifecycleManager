@@ -23,14 +23,14 @@ const userSlice = createSlice({
             state.data = action.payload;
 
             const persistentStorage = makePersistentStorage();
-            persistentStorage.set("user", action.payload);
+            persistentStorage.setItem("user", JSON.stringify(action.payload));
         },
         removeUser(state: UserState){
             state.data = null;
 
             const persistentStorage = makePersistentStorage();
-            persistentStorage.remove("user");
-            persistentStorage.remove("x-access-token");
+            persistentStorage.removeItem("user");
+            persistentStorage.removeItem("X-Access-Token");
         }
     }
 });

@@ -2,24 +2,19 @@ import { IPersistentStorage } from "@/infrastructure/persistentStorage/IPersiste
 
 export class LocalStorageImpl implements IPersistentStorage {
 
-    get<T>(key: string): T | null {
+  getItem(key: string): string | null {
+    return localStorage.getItem(key);
+  }
 
-        const value = localStorage.getItem(key);
+  setItem(key: string, value: string) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
 
-        return (value != null) ?
-            JSON.parse(value) as T
-            : null;
-    }
+  removeItem(key: string) {
+    localStorage.removeItem(key);
+  }
 
-    set(key: string, value: any) {
-        localStorage.setItem(key, JSON.stringify(value));
-    }
-
-    remove(key: string) {
-        localStorage.removeItem(key);
-    }
-
-    clearAll() {
-        localStorage.clear();
-    }
+  clearAll() {
+    localStorage.clear();
+  }
 }

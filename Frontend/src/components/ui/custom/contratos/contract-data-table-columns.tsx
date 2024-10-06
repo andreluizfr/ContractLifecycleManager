@@ -89,7 +89,7 @@ export const contractDataTableColumns: ColumnDef<Contract>[] = [
             const status = recreateEnum(parseInt(row.getValue("status")));
             return (
                 <div className="text-center font-medium whitespace-nowrap">
-                    <Trans i18nKey={'webapp.loanColumn.' + status?.id}>
+                    <Trans i18nKey={'webapp.loanColumn.loanStatus.' + status?.id}>
                         {status?.fallbackDescription}
                     </Trans>
                 </div>

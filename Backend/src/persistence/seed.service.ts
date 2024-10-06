@@ -24,8 +24,8 @@ export class SeedService {
 
     if(usersCount === 0) {
       const initialUsers = [
-        await User.new({ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', password: 'password1', createdAt: new Date }),
-        await User.new({ firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', password: 'password2', createdAt: new Date }),
+        await User.new({ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', password: 'password1', createdAt: new Date, googleOAuthFlag: false }),
+        await User.new({ firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', password: 'password2', createdAt: new Date, googleOAuthFlag: false }),
       ];
 
       await userModel.insertMany(initialUsers);

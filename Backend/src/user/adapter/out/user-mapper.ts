@@ -8,12 +8,27 @@ export class UserMapper {
   constructor(@Inject('MongoDatabaseService') private readonly mongoDatabaseService: MongoDatabaseService){}
 
   toModel(user: Partial<User>): UserDocument {
-    const User: UserModel = this.mongoDatabaseService.conn.connection.model<UserDocument>('User', UserSchema);
+    const UserModel: UserModel = this.mongoDatabaseService.conn.connection.model<UserDocument>('User', UserSchema);
+    return new UserModel({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+      createdAt: user.createdAt,
+      modifiedAt: user.modifiedAt,
+      googleOAuthFlag: user.googleOAuthFlag
+    });
+  }
+
+  toDomain(user: UserDocument): User {
     return new User({
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      password: user.password
+      password: user.password,
+      createdAt: user.createdAt,
+      modifiedAt: user.modifiedAt,
+      googleOAuthFlag: user.googleOAuthFlag
     });
   }
 }

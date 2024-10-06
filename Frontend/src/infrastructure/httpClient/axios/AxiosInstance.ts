@@ -1,42 +1,44 @@
-import axios from 'axios'
-import { makePersistentStorage } from '@/factories/makePersistentStorage'
-import { HttpStatusCode } from "../HttpStatusCode"
-import { userStore } from '@/infrastructure/store/zustand/userStore'
+import axios from 'axios';
+import { HttpStatusCode } from '../HttpStatusCode';
 
-const axiosInstance = axios.create({
-    baseURL: process.env.API_BASE_URL
-});
+const createAxiosInstance = (
+  currentAccessToken: string | null,
+  updateAccessToken: (accessToken: string) => void,
+  removeAccessToken: () => void
+) => {
 
-axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = process.env.APP_BASE_URL;
-axiosInstance.defaults.headers.common['Access-Control-Expose-Headers'] = "Set-Cookie";
-axiosInstance.defaults.withCredentials = true;
+  const axiosInstance = axios.create({
+    baseURL: `${process.env.API_BASE_URL}/api`
+  });
 
-const persistentStorage = makePersistentStorage();
+  axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = process.env.APP_BASE_URL;
+  axiosInstance.defaults.headers.common['Access-Control-Expose-Headers'] = "Set-Cookie";
+  axiosInstance.defaults.withCredentials = true;
 
-axiosInstance.interceptors.request.use(requestConfig => {
-  const accessToken = persistentStorage.get<string>('X-Access-Token');
-  if(accessToken) {
-    requestConfig.headers.Authorization = `Bearer ${accessToken}`;
-  }
-  return requestConfig;
-});
-
-axiosInstance.interceptors.response.use(
-  response => {
-    const accessToken = response?.headers['X-Access-Token'];
-    if(accessToken) {
-      persistentStorage.set('X-Access-Token', accessToken);
+  axiosInstance.interceptors.request.use(requestConfig => {
+    if(currentAccessToken) {
+      requestConfig.headers.Authorization = `Bearer ${currentAccessToken}`;
     }
-    return Promise.resolve(response);
-  },
-  error => {
-    if(error.response && (error.response.status == HttpStatusCode.Unauthorized || error.response.status == HttpStatusCode.Forbidden)) {
-      userStore(state => state.removeUser)();
-      persistentStorage.remove('X-Access-Token');
-      window.location.href = process.env.APP_BASE_URL ?? "";
-    }
-    return Promise.reject(error);
-  }
-);
+    return requestConfig;
+  });
 
-export { axiosInstance };
+  axiosInstance.interceptors.response.use(
+    response => {
+      const accessToken: string | null = response?.headers['X-Access-Token'] ?? null;
+      if(accessToken) {
+        updateAccessToken(accessToken);
+      }
+      return Promise.resolve(response);
+    },
+    error => {
+      if(error.response && error.response.status == HttpStatusCode.Unauthorized) {
+        removeAccessToken();
+      }
+      return Promise.reject(new Error(error));
+    }
+  );
+
+  return axiosInstance;
+}
+
+export { createAxiosInstance };
